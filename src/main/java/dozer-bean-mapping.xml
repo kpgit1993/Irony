@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping map-id="user_mapping">
+		<class-a>com.ecomm.dbentity.User</class-a>
+		<class-b>com.ecomm.wsentity.User</class-b>
+		<field>
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+		<field>
+			<a>userName</a>
+			<b>userName</b>
+		</field>
+		<field>
+			<a>mobileNo</a>
+			<b>mobileNo</b>
+		</field>
+		<field>
+			<a>email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>type</a>
+			<b>type</b>
+		</field>
+		<field>
+			<a>state</a>
+			<b>state</b>
+		</field>
+		<field>
+			<a>regDate</a>
+			<b>regDate</b>
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>
+		</field>
+		<field>
+			<a>duePayment</a>
+			<b>duePayment</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="order_mapping">
+		<class-a>com.ecomm.dbentity.Order</class-a>
+		<class-b>com.ecomm.wsentity.Order</class-b>
+		<field>
+			<a>orderId</a>
+			<b>orderId</b>
+		</field>
+		<field>
+			<a>orderDate</a>
+			<b>orderDate</b>
+		</field>
+		<field>
+			<a>address</a>
+			<b>address</b>
+		</field>
+		<field>
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+		<field>
+			<a>orderStatus</a>
+			<b>orderStatus</b>
+		</field>
+		<field>
+			<a>cost</a>
+			<b>cost</b>
+		</field>
+		<field-exclude>
+			<a>orderDetails</a>
+			<b>orderDetails</b>
+		</field-exclude>
+	</mapping>
+			
+	<mapping map-id="item_mapping">
+		<class-a>com.ecomm.dbentity.Item</class-a>
+		<class-b>com.ecomm.wsentity.Item</class-b>
+		<field>
+			<a>itemId</a>
+			<b>itemId</b>
+		</field>
+		<field>
+			<a>itemName</a>
+			<b>itemName</b>
+		</field>
+		<field>
+			<a>itemSize</a>
+			<b>itemSize</b>
+		</field>
+		<field>
+			<a>itemDetails</a>
+			<b>itemDetails</b>
+		</field>
+		<field>
+			<a>cost</a>
+			<b>cost</b>
+		</field>
+	</mapping>		
+
+	<mapping map-id="payment_mapping">
+		<class-a>com.ecomm.dbentity.Payment</class-a>
+		<class-b>com.ecomm.wsentity.Payment</class-b>
+		<field>
+			<a>paymentId</a>
+			<b>paymentId</b>
+		</field>
+		<field>
+			<a>orderId</a>
+			<b>orderId</b>
+		</field>
+		<field>
+			<a>paymentAmount</a>
+			<b>paymentAmount</b>
+		</field>
+		<field>
+			<a>paymentMode</a>
+			<b>paymentMode</b>
+		</field>
+		<field>
+			<a>paymentDate</a>
+			<b>paymentDate</b>
+		</field>
+	</mapping>		
+	
+</mappings>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd  
+		http://cxf.apache.org/jaxrs  http://cxf.apache.org/schemas/jaxrs.xsd 
+		http://cxf.apache.org/jaxws  http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<!-- SERVICE PATH CONSTANTS -->
+	<bean id="servicePathsImpl" class="com.ecomm.ws.servicelines.ServicePathsImpl">
+		<property name="PROTOCOL" value="http" />
+		<property name="HOST" value="localhost" />
+		<property name="PORT" value="8280" />
+		<property name="APPLICATION_CONTEXT" value="/irony" />
+		<property name="SERVICE_BASE_URL" value="/services" />
+	</bean>
+
+	<!-- DOZER MAPPER BEANS -->
+	<bean id="dozerMapper" class="com.ecomm.ws.services.utils.beanmappers.DozerMapper">
+		<constructor-arg type="java.lang.String" value="dozer-bean-mapping.xml" />
+	</bean>
+
+	<!-- USER BEANS -->
+	<bean id="userDAO" class="com.ecomm.dao.UserDAOImpl" />
+
+	<bean id="userDaoServices" class="com.ecomm.db.services.UserDaoServicesImpl">
+		<property name="userDAO" ref="userDAO" />
+	</bean>
+
+	<bean id="userServices" class="com.ecomm.ws.services.UserServicesImpl">
+		<property name="userDaoServices" ref="userDaoServices" />
+	</bean>
+
+	<!-- ITEM BEANS -->
+	<bean id="itemDAO" class="com.ecomm.dao.ItemDAOImpl" />
+
+	<bean id="itemDaoServices" class="com.ecomm.db.services.ItemDaoServicesImpl">
+		<property name="itemDAO" ref="itemDAO" />
+	</bean>
+
+	<bean id="itemServices" class="com.ecomm.ws.services.ItemServicesImpl">
+		<property name="itemDaoServices" ref="itemDaoServices" />
+	</bean>
+
+	<!-- ORDER BEANS -->
+	<bean id="orderDAO" class="com.ecomm.dao.OrderDAOImpl" />
+
+	<bean id="orderDaoServices" class="com.ecomm.db.services.OrderDaoServicesImpl">
+		<property name="orderDAO" ref="orderDAO" />
+		<property name="itemDAO" ref="itemDAO" />
+	</bean>
+
+	<bean id="orderServices" class="com.ecomm.ws.services.OrderServicesImpl">
+		<property name="orderDaoServices" ref="orderDaoServices" />
+	</bean>
+
+	<!-- PAYMENT BEANS -->
+	<bean id="paymentDAO" class="com.ecomm.dao.PaymentDAOImpl" />
+
+	<bean id="paymentDaoServices" class="com.ecomm.db.services.PaymentDaoServicesImpl">
+		<property name="paymentDAO" ref="paymentDAO" />
+		<property name="orderDAO" ref="orderDAO" />
+	</bean>
+
+	<bean id="paymentServices" class="com.ecomm.ws.services.PaymentServicesImpl">
+		<property name="paymentDaoServices" ref="paymentDaoServices" />
+	</bean>
+	
+	
+	<!-- RESPONSE FILTER -->
+	<bean id="responseFilter" class="com.ecomm.interceptors.ResponseBodyFormatter"/>
+	
+	<!-- JAXRS SERVICE ENDPOINT BEANS -->
+	<jaxrs:server id="productService" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="userServices" />
+			<ref bean="orderServices" />
+			<ref bean="itemServices" />
+			<ref bean="paymentServices" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<ref bean="responseFilter" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+
+	<!-- ASPECT BEANS -->
+	<bean name="genericAspects" class="com.ecomm.aspects.GenericMethodAspect" />
+	<aop:config>
+		<aop:aspect id="genericMethodAspect" ref="genericAspects">
+			<aop:before method="retrieveMethodOnInvoke"
+				pointcut="execution(* com.ecomm.ws.services.*Services.*(..))" />
+			<aop:after method="leaveMethodAfterInvoke"
+				pointcut="execution(* com.ecomm.ws.services.*Services.*(..))" />
+			<aop:after-throwing method="errorListenerOnMethodInvoke"
+				pointcut="execution(* com.ecomm.ws.services.*Services.*(..))"
+				throwing="ex" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

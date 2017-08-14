@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	
+	<class name="com.ecomm.dbentity.Order" table="IRON_ORDER">
+		<id name="orderId" column="ORDER_ID">
+			<generator class="sequence"/>
+		</id>
+		<property name="orderDate" column="ORDER_DATE" type="date"/>
+		<property name="address" column="ADDRESS"/>
+		<property name="userId" column="USER_ID"/>
+		<property name="orderStatus" column="ORDER_STATUS"/>
+		<property name="cost" column="COST"/>
+		
+		<!-- ORDER DETAILS MAP: https://www.tutorialspoint.com/hibernate/hibernate_map_mapping.htm -->
+	 	<map name="orderDetails" cascade   ="all" fetch="join" lazy="false">
+	 		<key column="ORDER_ID"/><!-- foreign key constraint default null -->
+	 		<index column="ORDER_ITEM_ID" type="string"/><!-- key of map -->
+	 		<one-to-many class="com.ecomm.dbentity.OrderDetails" />
+	 	</map>	
+	</class>
+	
+	<class name="com.ecomm.dbentity.OrderDetails" table="IRON_ORDER_DETAILS">
+		<id name="orderDetailsId" column="ORDER_DETAILS_ID">
+			<generator class="native"/>
+		</id>
+		<property name="orderItemNo" column="ORDER_ITEM_NO"/>
+	</class>
+ 		
+</hibernate-mapping>  
