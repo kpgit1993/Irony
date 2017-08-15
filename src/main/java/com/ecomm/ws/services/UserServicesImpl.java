@@ -98,7 +98,6 @@ public class UserServicesImpl implements UserServices {
 		}
 	}
 
-
 	public Response addUser(User wsuser, UriInfo uriInfo) {
 		validateUserData(wsuser);
 		try{
@@ -138,7 +137,6 @@ public class UserServicesImpl implements UserServices {
 			throw new EcommWebException(400, "INALID DATA: min. password length should be 6");
 		}
 	}
-
 	
 	public Response updateUser(User wsuser, UriInfo uriInfo) {
 		if (wsuser.getUserId() == null) {

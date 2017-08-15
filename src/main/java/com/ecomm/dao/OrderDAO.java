@@ -1,8 +1,8 @@
 package com.ecomm.dao;
 
 import java.util.List;
-
 import com.ecomm.dbentity.Order;
+
 
 public interface OrderDAO {
 
@@ -16,5 +16,24 @@ public interface OrderDAO {
 
 	public void deleteAllOrders();
 
-	public void updateOrder(Order order);
+	public Order updateOrder(Order order);
+
+	public List<Order> listOrdersByUserId(String userId);
+
+	public List<Order> listPlacedOrdersByUserId(String userId);
+
+	public List<Order> listClosedOrdersByUserId(String userId);
+
+	public List<Order> listOrdersBetweenDates(String fromDate, String toDate);
+
+	public List<Order> listClosedOrdersByDate(String date);
+
+	public List<Order> listPlacedOrdersByDate(String date);
+
+	public List<Order> listOrdersByDate(String date);
+
+	public List<Order> listPlacedOrdersBetweenDates(String fromDate, String toDate);
+
+	public List<Order> listClosedOrdersBetweenDates(String fromDate, String toDate);
+
 }

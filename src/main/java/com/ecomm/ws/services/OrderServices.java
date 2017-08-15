@@ -8,10 +8,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import com.ecomm.ws.servicelines.ServicePaths;
 import com.ecomm.wsentity.Order;
 
@@ -20,7 +22,7 @@ import com.ecomm.wsentity.Order;
 public interface OrderServices {
 
 	@GET
-	@Path(ServicePaths.LIST_ALL_ORDER)
+	@Path(ServicePaths.LIST_ALL_ORDERS)
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response listAllOrders();
 
@@ -28,18 +30,61 @@ public interface OrderServices {
 	@Path(ServicePaths.LIST_ORDER_BY_ID)
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response listOrderByOrderId(@PathParam("orderId") String orderId);
-
-/*		
+	
+	/**
+	 * Required for getting the cart information
+	 */
 	@GET
-	@Path(ServicePaths.LIST_ORDER_BY_EMAIL)
+	@Path(ServicePaths.LIST_ORDERS_BY_USER_ID)
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response listOrderByEmail(@PathParam("email") String email);
+	public Response listOrdersByUserId(@QueryParam("userId") String userId);
 	
 	@GET
-	@Path(ServicePaths.LIST_ORDER_BY_MOBILE_NO)
+	@Path(ServicePaths.LIST_PLACED_ORDERS_BY_USER_ID)
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response listOrderByMobileNumber(@PathParam("mobileNo") String mobileNumber);
-*/	
+	public Response listPlacedOrdersByUserId(@QueryParam("userId") String userId);
+	
+	@GET
+	@Path(ServicePaths.LIST_CLOSED_ORDERS_BY_USER_ID)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listClosedOrdersByUserId(@QueryParam("userId") String userId);
+
+	@GET
+	@Path(ServicePaths.LIST_ORDERS_BY_DATE)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listOrdersByDate(@QueryParam("date") String date);
+
+	@GET
+	@Path(ServicePaths.LIST_PLACED_ORDERS_BY_DATE)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listPlacedOrdersByDate(@QueryParam("date") String date);
+
+	@GET
+	@Path(ServicePaths.LIST_CLOSED_ORDERS_BY_DATE)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listClosedOrdersByDate(@QueryParam("date") String date);
+	
+	@GET
+	@Path(ServicePaths.LIST_ORDERS_BETWEEN_DATES)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listOrdersBetweenDates(
+			@QueryParam("fromDate") String fromDate, 
+			@QueryParam("toDate") String toDate);
+
+	@GET
+	@Path(ServicePaths.LIST_PLACED_ORDERS_BETWEEN_DATES)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listPlacedOrdersBetweenDates(
+			@QueryParam("fromDate") String fromDate, 
+			@QueryParam("toDate") String toDate);
+	
+	@GET
+	@Path(ServicePaths.LIST_CLOSED_ORDERS_BETWEEN_DATES)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response listClosedOrdersBetweenDates(
+			@QueryParam("fromDate") String fromDate, 
+			@QueryParam("fromDate") String toDate);
+	
 	@POST
 	@Path(ServicePaths.ADD_ORDER)
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

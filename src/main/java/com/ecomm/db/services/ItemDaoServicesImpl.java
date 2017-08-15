@@ -32,4 +32,49 @@ public class ItemDaoServicesImpl {
 			throw new EcommException(500, e);
 		}
 	}
+
+	@Transactional
+	public com.ecomm.dbentity.Item addItem(com.ecomm.dbentity.Item item) throws EcommException {
+		try{
+			return itemDAO.addItem(item);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public com.ecomm.dbentity.Item updateProduct(com.ecomm.dbentity.Item item) throws EcommException {
+		try{
+			return itemDAO.updateItem(item);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deleteItem(com.ecomm.dbentity.Item item) throws EcommException {
+		try{
+			itemDAO.deleteItem(item);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deleteItemByItemId(String itemId) throws EcommException {
+		try{
+			itemDAO.deleteItemByItemId(itemId);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deleteAllItems() throws EcommException {
+		try{
+			itemDAO.deleteAllItems();
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
 }
