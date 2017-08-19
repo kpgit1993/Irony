@@ -53,4 +53,16 @@ public class Payment {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
+	
+	@Override
+	public String toString() {
+		return 
+			"{"+this+": "
+				+ "itemId="+this.paymentId
+				+ "itemName="+this.paymentMode
+				+ "itemCategory="+this.paymentDate
+				+ "itemSize="+this.paymentAmount
+				+ "itemDetails="+this.orderId
+			+"}";
+	}
 }

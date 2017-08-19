@@ -15,5 +15,9 @@ public interface PaymentDAO {
 	public List<Payment> listPaymentsyByOrderId(String orderId);
 	public List<Payment> listPaymentsyByUserId(String userId);
 	public Payment updatePayment(Payment wspayment);
+	public void deletePayment(Payment payment);
+	public void deletePaymentByOrderId(String orderId);
+	public void deletePaymentByPaymentId(String paymentId);
+	public void deleteAllPayments();
 	
 }

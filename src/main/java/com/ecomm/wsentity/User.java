@@ -93,4 +93,19 @@ public class User {
 		this.duePayment = duePayment;
 	}
 	
+	@Override
+	public String toString() {
+		return 
+			"{"+this+": "
+				+ "userId="+this.userId
+				+ "userName="+this.userName
+				+ "email="+this.email
+				+ "mobileNo="+this.mobileNo
+				+ "regDate="+this.regDate
+				+ "duePayment="+this.duePayment
+				+ "password="+this.password
+				+ "type="+this.type
+				+ "state="+this.state
+			+"}";
+	}
 }

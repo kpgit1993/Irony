@@ -31,6 +31,10 @@ public class OrderDetails {
 	}
 	
 	public String toString(){
-		return "{ "+this.orderDetailsId+", "+this.orderItemNo+" }";
+		return 
+				"{"+this+": "
+					+ "orderDetailsId="+this.orderDetailsId
+					+ "orderItemNo="+this.orderItemNo
+				+"}";
 	}
 }

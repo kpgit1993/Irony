@@ -1,8 +1,10 @@
 package com.ecomm.ws.services;
 
 import java.util.List;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import com.ecomm.wsentity.Payment;
 import com.ecomm.commonutility.logger.EcommLogger;
 import com.ecomm.db.services.PaymentDaoServicesImpl;
@@ -152,39 +154,54 @@ public class PaymentServicesImpl implements PaymentServices {
 	}
 
 	public Response deletePayment(Payment wspayment) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			paymentDaoServices.deletePayment(PaymentMapper.mapWsToDb(wspayment));
+			return EcommResponse.getResponseNoContent();
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
 	}
 
 	public Response deleteAllPayments() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			paymentDaoServices.deleteAllPayments();
+			return EcommResponse.getResponseNoContent();
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
 	}
 
 	public Response deletePaymentByPaymentId(String paymentId) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			paymentDaoServices.deletePaymentByPaymentId(paymentId);
+			return EcommResponse.getResponseNoContent();
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
 	}
 
 	public Response deletePaymentByOrderId(String orderId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Response listPaymentsyByClosedOrders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Response listPaymentsyByOpenOrders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Response listPaymentsyByOpenOrders(String fromDate, String toDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+		try{
+			paymentDaoServices.deletePaymentByOrderId(orderId);
+			return EcommResponse.getResponseNoContent();
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}	
 }

@@ -55,4 +55,17 @@ public class Item {
 	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
+	
+	@Override
+	public String toString() {
+		return 
+			"{"+this+": "
+				+ "itemId="+this.itemId
+				+ "itemName="+this.itemName
+				+ "itemCategory="+this.itemCategory
+				+ "itemSize="+this.itemSize
+				+ "itemDetails="+this.itemDetails
+				+ "cost="+this.cost
+			+"}";
+	}
 }

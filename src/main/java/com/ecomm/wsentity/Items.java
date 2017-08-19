@@ -31,4 +31,12 @@ public class Items {
 	public void addItem(Item item) {
 		this.itemList.add(item);
 	}
+	
+	@Override
+	public String toString(){
+		return 
+			"{"+this+": "
+				+ "itemList="+this.itemList
+			+"}";
+	}
 }

@@ -74,8 +74,15 @@ public class Order {
 	}
 	
 	public String toString(){
-		return "{ "+orderId+", "+orderDate+", "+address+", "
-				+userId+", "+orderStatus+", "+cost+", "
-				+", "+orderDetails+" }";
+		return 
+				"{"+this+": "
+					+ "orderId="+this.orderId
+					+ "userId="+this.userId
+					+ "orderStatus="+this.orderStatus
+					+ "orderDate="+this.orderDate
+					+ "cost="+this.cost
+					+ "address="+this.address
+					+ "itemSize="+this.orderDetails
+				+"}";
 	}
 }

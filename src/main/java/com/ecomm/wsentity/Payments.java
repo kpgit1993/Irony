@@ -30,4 +30,12 @@ public class Payments {
 	public void addPayment(Payment payment) {
 		this.paymentList.add(payment);
 	}
+	
+	@Override
+	public String toString(){
+		return 
+			"{"+this+": "
+				+ "paymentList="+this.paymentList
+			+"}";
+	}
 }

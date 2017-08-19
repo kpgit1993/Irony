@@ -34,4 +34,12 @@ public class Orders {
 	public void addOrder(Order order) {
 		this.orderList.add(order);
 	}
+	
+	@Override
+	public String toString(){
+		return 
+			"{"+this+": "
+				+ "orderList="+this.orderList
+			+"}";
+	}
 }

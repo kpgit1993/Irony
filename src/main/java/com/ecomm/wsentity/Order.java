@@ -75,4 +75,17 @@ public class Order {
 	public void setOrderDetails(Map<String, Integer> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+	
+	public String toString(){
+		return 
+			"{"+this+": "
+				+ "orderId="+this.orderId
+				+ "userId="+this.userId
+				+ "orderStatus="+this.orderStatus
+				+ "orderDate="+this.orderDate
+				+ "cost="+this.cost
+				+ "address="+this.address
+				+ "itemSize="+this.orderDetails
+			+"}";
+	}
 }

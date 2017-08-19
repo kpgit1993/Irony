@@ -82,6 +82,26 @@ public class PaymentDAOImpl implements PaymentDAO {
 		session.update(payment);
 		return (Payment)session.get(Payment.class, payment.getPaymentId());
 	}
+
+	public void deletePayment(Payment payment) {
+		DatabaseSessionManager.getDatabaseSession().delete(payment);
+	}
+
+	public void deletePaymentByOrderId(String orderId) {
+		String deleteHql = "delete from Payment where orderId= :orderId";
+		DatabaseSessionManager.getDatabaseSession()
+			.createQuery(deleteHql).setString("orderId", orderId).executeUpdate();
+	}
+
+	public void deletePaymentByPaymentId(String paymentId) {
+		Session session = DatabaseSessionManager.getDatabaseSession();
+		Payment payment = (Payment)session.get(Payment.class, paymentId);
+		session.delete(payment);
+	}
+
+	public void deleteAllPayments() {
+		DatabaseSessionManager.getDatabaseSession().createQuery("delete from Item").executeUpdate();
+	}
 	
 	
 }

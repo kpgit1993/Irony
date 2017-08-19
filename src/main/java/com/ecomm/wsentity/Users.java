@@ -34,5 +34,12 @@ public class Users {
 	public void addUser(User user) {
 		this.userList.add(user);
 	}
-
+	
+	@Override
+	public String toString(){
+		return 
+			"{"+this+": "
+				+ "userList="+this.userList
+			+"}";
+	}
 }

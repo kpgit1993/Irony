@@ -54,23 +54,6 @@ public interface PaymentServices {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response listPaymentsyByUserMobileNumber(@QueryParam("mno") String mno);
 	
-	@GET
-	@Path(ServicePaths.LIST_PAYMENTS_BY_CLOSED_ORDERS)
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response listPaymentsyByClosedOrders();
-	
-	@GET
-	@Path(ServicePaths.LIST_PAYMENTS_BY_OPEN_ORDERS)
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response listPaymentsyByOpenOrders();
-	
-	@GET
-	@Path(ServicePaths.LIST_PAYMENTS_WITHIN_DATE)
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response listPaymentsyByOpenOrders(
-			@QueryParam("fromDate") String fromDate, 
-			@QueryParam("toDate") String toDate);
-	
 	@POST
 	@Path(ServicePaths.ADD_PAYMENT)
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

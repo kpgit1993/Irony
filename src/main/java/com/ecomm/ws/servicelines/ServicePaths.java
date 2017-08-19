@@ -64,9 +64,6 @@ public interface ServicePaths {
 	String LIST_PAYMENTS_BY_USER_EMAIL			=	"/payments";
 	String LIST_PAYMENTS_BY_USER_MOBILE_NO		=	"/payments";
 	
-	String LIST_PAYMENTS_BY_CLOSED_ORDERS		=	"/payments";
-	String LIST_PAYMENTS_BY_OPEN_ORDERS			=	"/payments";
-	
 	String LIST_PAYMENTS_BY_DATE 				= 	"/payments/date";
 	String LIST_PAYMENTS_WITHIN_DATE 			= 	"/payments";
 	

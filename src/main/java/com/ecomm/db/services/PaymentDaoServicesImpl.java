@@ -158,4 +158,40 @@ public class PaymentDaoServicesImpl {
 			throw new EcommException(500, e);
 		}
 	}
+
+	@Transactional
+	public void deletePaymentByOrderId(String orderId) throws EcommException {
+		try{
+			paymentDAO.deletePaymentByOrderId(orderId);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deletePaymentByPaymentId(String paymentId) throws EcommException {
+		try{
+			paymentDAO.deletePaymentByPaymentId(paymentId);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deleteAllPayments() throws EcommException {
+		try{
+			paymentDAO.deleteAllPayments();
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public void deletePayment(Payment payment) throws EcommException {
+		try{
+			paymentDAO.deletePayment(payment);
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
 }
