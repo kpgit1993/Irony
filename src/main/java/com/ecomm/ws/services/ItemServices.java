@@ -8,10 +8,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import com.ecomm.ws.servicelines.ServicePaths;
 import com.ecomm.wsentity.Item;
 
@@ -29,6 +31,10 @@ public interface ItemServices {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response listItemByItemId(@PathParam("itemId") String itemId);
 
+	@GET
+	@Path(ServicePaths.LIST_ITEM_BY_ITEM_CATEGORY)
+	public Response listItemByItemCategory(@QueryParam("category") String category);
+	
 	@POST
 	@Path(ServicePaths.ADD_ITEM)
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

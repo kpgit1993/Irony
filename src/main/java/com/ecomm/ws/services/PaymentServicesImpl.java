@@ -9,6 +9,7 @@ import com.ecomm.db.services.PaymentDaoServicesImpl;
 import com.ecomm.exception.EcommException;
 import com.ecomm.exception.EcommWebException;
 import com.ecomm.ws.services.PaymentServices;
+import com.ecomm.ws.services.utils.beanmappers.OrderMapper;
 import com.ecomm.ws.services.utils.beanmappers.PaymentMapper;
 import com.ecomm.ws.utils.EcommResponse;
 
@@ -61,6 +62,128 @@ public class PaymentServicesImpl implements PaymentServices {
 			e.printStackTrace();
 			throw new EcommWebException(500, e);
 		}
+	}
+
+	public Response listPaymentsyByPaymentDate(String paymentDate) {
+		try{ 
+			List<com.ecomm.dbentity.Payment> dbpayments = paymentDaoServices.listPaymentByPaymentDate(paymentDate);
+			EcommLogger.info("dbpayments: "+dbpayments);
+			return EcommResponse.getResponseOk(PaymentMapper.mapDbToWs(dbpayments));
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response listPaymentsyByOrderId(String orderId) {
+		try{ 
+			List<com.ecomm.dbentity.Payment> dbpayments = paymentDaoServices.listPaymentsyByOrderId(orderId);
+			EcommLogger.info("dbpayments: "+dbpayments);
+			return EcommResponse.getResponseOk(PaymentMapper.mapDbToWs(dbpayments));
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response listPaymentsyByUserId(String userId) {
+		try{ 
+			EcommLogger.info("Serach orders for userId = "+userId);
+			List<com.ecomm.dbentity.Payment> dbpayments = paymentDaoServices.listPaymentsyByUserId(userId);
+			EcommLogger.info("dbpayments: "+dbpayments);
+			return EcommResponse.getResponseOk(PaymentMapper.mapDbToWs(dbpayments));
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response listPaymentsyByUserEmailId(String emailId) {
+		try{ 
+			List<com.ecomm.dbentity.Payment> dbpayments = paymentDaoServices.listPaymentsyByUserEmailId(emailId);
+			EcommLogger.info("dbpayments: "+dbpayments);
+			return EcommResponse.getResponseOk(PaymentMapper.mapDbToWs(dbpayments));
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response listPaymentsyByUserMobileNumber(String mno) {
+		try{ 
+			List<com.ecomm.dbentity.Payment> dbpayments = paymentDaoServices.listPaymentsyByUserMobileNumber(mno);
+			EcommLogger.info("dbpayments: "+dbpayments);
+			return EcommResponse.getResponseOk(PaymentMapper.mapDbToWs(dbpayments));
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	
+	public Response updatePayment(Payment wspayment, UriInfo uriInfo) {
+		try{ 
+			com.ecomm.dbentity.Payment dbpayment 
+				= paymentDaoServices.updatePayment(PaymentMapper.mapWsToDb(wspayment));
+			EcommLogger.info("dbpayment: "+dbpayment);
+			return EcommResponse.getResponseUpdated(PaymentMapper.mapDbToWs(dbpayment), uriInfo);
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response deletePayment(Payment wspayment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response deleteAllPayments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response deletePaymentByPaymentId(String paymentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response deletePaymentByOrderId(String orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response listPaymentsyByClosedOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response listPaymentsyByOpenOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response listPaymentsyByOpenOrders(String fromDate, String toDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

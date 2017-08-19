@@ -1,6 +1,7 @@
 package com.ecomm.dao;
 
 import java.util.List;
+
 import com.ecomm.dbentity.Payment;
 
 
@@ -11,5 +12,8 @@ public interface PaymentDAO {
 	public List<Payment> listAllPayments();
 	public List<Payment> listPaymentByPaymentDate(String Date);
 	public List<Payment> listAllPaymentsBetweenDates(String fromDate, String toDate);
+	public List<Payment> listPaymentsyByOrderId(String orderId);
+	public List<Payment> listPaymentsyByUserId(String userId);
+	public Payment updatePayment(Payment wspayment);
 	
 }

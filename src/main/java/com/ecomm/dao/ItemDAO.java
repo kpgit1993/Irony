@@ -1,6 +1,7 @@
 package com.ecomm.dao;
 
 import java.util.List;
+
 import com.ecomm.dbentity.Item;
 
 
@@ -19,5 +20,7 @@ public interface ItemDAO {
 	void deleteItemByItemId(String itemId);
 	
 	void deleteAllItems();
+
+	List<Item> listItemByItemCategory(String category);
 	
 }

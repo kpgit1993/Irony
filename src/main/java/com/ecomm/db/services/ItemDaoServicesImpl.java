@@ -1,7 +1,9 @@
 package com.ecomm.db.services;
 
 import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
+
 import com.ecomm.dao.ItemDAO;
 import com.ecomm.dbentity.Item;
 import com.ecomm.exception.EcommException;
@@ -73,6 +75,15 @@ public class ItemDaoServicesImpl {
 	public void deleteAllItems() throws EcommException {
 		try{
 			itemDAO.deleteAllItems();
+		}catch(Exception e){
+			throw new EcommException(500, e);
+		}
+	}
+
+	@Transactional
+	public List<Item> listItemByItemCategory(String category) throws EcommException {
+		try{
+			return itemDAO.listItemByItemCategory(category);
 		}catch(Exception e){
 			throw new EcommException(500, e);
 		}

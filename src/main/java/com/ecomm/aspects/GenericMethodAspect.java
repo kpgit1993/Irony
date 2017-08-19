@@ -30,13 +30,18 @@ public class GenericMethodAspect {
 		EcommLogger.info(target);
 		
 		// logging method parameters
-		Object[] methodArguments = joinPoint.getArgs();
-		if(methodArguments.length > 0){
-			List<String> argList = new ArrayList<String>();
-			for(Object argument : methodArguments){
-				argList.add(argument.toString());
+		try{
+			Object[] methodArguments = joinPoint.getArgs();
+			if(methodArguments.length > 0){
+				List<String> argList = new ArrayList<String>();
+				for(Object argument : methodArguments){
+					argList.add(argument.toString());
+				}
+				EcommLogger.info(LoggerConstants.TAB_ENTER+"METHOD ARGUMENTS - "+argList);
 			}
-			EcommLogger.info(LoggerConstants.TAB_ENTER+"METHOD ARGUMENTS - "+argList);
+		}catch(Exception e){
+			e.printStackTrace();
+			EcommLogger.error("EXCEPTION IN ASPECT: "+e.getClass()+": "+e.getMessage());
 		}
 		
 		// end aspect

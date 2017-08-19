@@ -5,11 +5,20 @@ public class Item {
 	private String itemId;
 	private String itemName;
 	private String itemSize;
+	private String itemCategory;
 	private String itemDetails;
 	private Integer cost;
 	
 	public Item(){
 		//For Hibernate Serialization
+	}
+
+	public String getItemCategory() {
+		return itemCategory;
+	}
+
+	public void setItemCategory(String itemCategory) {
+		this.itemCategory = itemCategory;
 	}
 
 	public String getItemId() {

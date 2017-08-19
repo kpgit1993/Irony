@@ -83,7 +83,7 @@ public interface OrderServices {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response listClosedOrdersBetweenDates(
 			@QueryParam("fromDate") String fromDate, 
-			@QueryParam("fromDate") String toDate);
+			@QueryParam("toDate") String toDate);
 	
 	@POST
 	@Path(ServicePaths.ADD_ORDER)

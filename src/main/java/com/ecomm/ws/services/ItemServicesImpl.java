@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
 import com.ecomm.commonutility.logger.EcommLogger;
 import com.ecomm.db.services.ItemDaoServicesImpl;
 import com.ecomm.exception.EcommException;
@@ -116,6 +117,22 @@ public class ItemServicesImpl implements ItemServices {
 		try{
 			itemDaoServices.deleteAllItems();
 			return EcommResponse.getResponseNoContent();
+		}catch (EcommException e) {
+			e.printStackTrace();
+			throw new EcommWebException(e);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new EcommWebException(500, e);
+		}
+	}
+
+	public Response listItemByItemCategory(String category) {
+		if(category == null || category.isEmpty()){
+			throw new EcommWebException(400, "INVALID ITEM CATEGORY = null");
+		}
+		try{
+			List<com.ecomm.dbentity.Item> dbitem = itemDaoServices.listItemByItemCategory(category);
+			return EcommResponse.getResponseOk(ItemMapper.mapDbToWs(dbitem));
 		}catch (EcommException e) {
 			e.printStackTrace();
 			throw new EcommWebException(e);

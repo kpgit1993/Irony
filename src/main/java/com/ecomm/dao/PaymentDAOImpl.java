@@ -6,11 +6,19 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
+import com.ecomm.commonutility.logger.EcommLogger;
 import com.ecomm.dao.utils.DatabaseSessionManager;
+import com.ecomm.dbentity.Item;
 import com.ecomm.dbentity.Order;
 import com.ecomm.dbentity.Payment;
+import com.ecomm.ws.services.OrderStatus;
+
 
 public class PaymentDAOImpl implements PaymentDAO {
 
@@ -44,4 +52,36 @@ public class PaymentDAOImpl implements PaymentDAO {
 		criteria.add(Restrictions.le("paymentDate", toDateString));
 		return criteria.list();
 	}
+	
+	public List<Payment> listPaymentsyByOrderId(String orderId) {
+		Session session = DatabaseSessionManager.getDatabaseSession();
+		Criteria criteria = session.createCriteria(Payment.class);
+		criteria.add(Restrictions.eq("orderId", orderId));
+		return criteria.list();
+	}
+
+	public List<Payment> listPaymentsyByUserId(String userId) {
+		
+		Session session = DatabaseSessionManager.getDatabaseSession();
+		
+		DetachedCriteria subCriteria = DetachedCriteria.forClass(Order.class);
+		subCriteria.add(Restrictions.eq("userId", userId));
+		subCriteria.setProjection(Projections.property("orderId"));	
+
+		DetachedCriteria outCriteria = DetachedCriteria.forClass(Payment.class);
+		outCriteria.add(Property.forName("orderId").in(subCriteria));
+		
+		Criteria executableCriteria = outCriteria.getExecutableCriteria(session);
+		List list = executableCriteria.list();
+		EcommLogger.info("Nest query result in DAO = "+list);
+		return list;
+	}
+
+	public Payment updatePayment(Payment payment) {
+		Session session = DatabaseSessionManager.getDatabaseSession();
+		session.update(payment);
+		return (Payment)session.get(Payment.class, payment.getPaymentId());
+	}
+	
+	
 }

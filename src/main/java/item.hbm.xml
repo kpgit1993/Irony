@@ -10,6 +10,7 @@
 		</id>
 		<property name="itemName" column="ITEM_NAME"/>
 		<property name="itemSize" column="ITEM_SIZE"/>
+		<property name="itemCategory" column="ITEM_CATEGORY"/>
 		<property name="itemDetails" column="ITEM_DETAILS"/>
 		<property name="cost" column="COST"/>
 	</class>

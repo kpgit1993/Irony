@@ -1,9 +1,15 @@
 package com.ecomm.dao;
 
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import com.ecomm.dbentity.Item;
+import com.ecomm.dbentity.Order;
 import com.ecomm.dao.utils.DatabaseSessionManager;
+import com.ecomm.ws.services.OrderStatus;
 
 
 public class ItemDAOImpl implements ItemDAO {
@@ -40,5 +46,12 @@ public class ItemDAOImpl implements ItemDAO {
 
 	public void deleteAllItems() {
 		DatabaseSessionManager.getDatabaseSession().createQuery("delete from Item").executeUpdate();
+	}
+
+	public List listItemByItemCategory(String category) {
+		Session session = DatabaseSessionManager.getDatabaseSession();
+		Criteria criteria = session.createCriteria(Item.class);
+		criteria.add(Restrictions.eq("category", category));
+		return criteria.list();
 	}	
 }
